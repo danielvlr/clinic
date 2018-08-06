@@ -1,8 +1,8 @@
-package br.leitao.clinica.repository;
+package br.leitao.security.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import br.leitao.clinica.security.UserCredentials;
+import br.leitao.security.entity.UserCredentials;
 
 public interface UserCredentialsRepository extends CrudRepository<UserCredentials, Long> {
 	public UserCredentials findByUsernameAndPassword(String username, String password);

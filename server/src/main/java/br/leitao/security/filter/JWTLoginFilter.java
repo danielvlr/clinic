@@ -1,4 +1,4 @@
-package br.leitao.clinica.security;
+package br.leitao.security.filter;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -18,7 +18,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.leitao.clinica.security.service.TokenAuthenticationService;
+import br.leitao.security.entity.UserCredentials;
+import br.leitao.security.service.TokenAuthenticationService;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 

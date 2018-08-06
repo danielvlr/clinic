@@ -1,4 +1,4 @@
-package br.leitao.clinica.config;
+package br.leitao.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.leitao.clinica.security.CustomAuthenticationProvider;
-import br.leitao.clinica.security.JWTAuthenticationFilter;
-import br.leitao.clinica.security.JWTLoginFilter;
+import br.leitao.security.filter.JWTAuthenticationFilter;
+import br.leitao.security.filter.JWTLoginFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -46,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.withUser("admin")
 //			.password("{noop}password")
 //			.roles("ADMIN");
+		
 		auth.authenticationProvider(authProvider);
 	}
 	

@@ -1,4 +1,4 @@
-package br.leitao.clinica.security.service;
+package br.leitao.security.service;
 
 import java.io.IOException;
 import java.util.Date;

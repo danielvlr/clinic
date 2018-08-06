@@ -1,10 +1,13 @@
-package br.leitao.clinica.security;
+package br.leitao.security.entity;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,7 +23,9 @@ public class UserCredentials {
 	private String username;
 	private String password;
 	private Boolean enabled;
-	private String role;
+
+	@OneToMany(mappedBy="userCredentials")
+	private List<UserRoles> userRoles;
 	
 	public UserCredentials() {
 	}
@@ -53,10 +58,10 @@ public class UserCredentials {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	public String getRole() {
-		return role;
+	public List<UserRoles> getUserRoles() {
+		return userRoles;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setUserRoles(List<UserRoles> userRoles) {
+		this.userRoles = userRoles;
 	}
 }

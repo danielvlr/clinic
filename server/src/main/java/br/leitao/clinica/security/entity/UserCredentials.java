@@ -1,4 +1,4 @@
-package br.leitao.security.entity;
+package br.leitao.clinica.security.entity;
 
 import java.util.List;
 

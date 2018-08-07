@@ -188,17 +188,4 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
-  addMenuItem(): void {
-    this.menuItems.add({
-      state: 'menu',
-      name: 'MENU',
-      type: 'sub',
-      icon: 'trending_flat',
-      children: [
-        {state: 'menu', name: 'MENU'},
-        {state: 'timelmenuine', name: 'MENU'}
-      ]
-    });
-  }
 }

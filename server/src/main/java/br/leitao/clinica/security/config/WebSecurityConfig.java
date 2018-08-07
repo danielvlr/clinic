@@ -1,4 +1,4 @@
-package br.leitao.security.config;
+package br.leitao.clinica.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.leitao.security.filter.JWTAuthenticationFilter;
-import br.leitao.security.filter.JWTLoginFilter;
+import br.leitao.clinica.security.filter.JWTAuthenticationFilter;
+import br.leitao.clinica.security.filter.JWTLoginFilter;
 
 @Configuration
 @EnableWebSecurity

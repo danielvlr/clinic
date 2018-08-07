@@ -1,4 +1,4 @@
-package br.leitao.security.entity;
+package br.leitao.clinica.security.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { single, multi } from './charts.data';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -207,7 +205,6 @@ export class DashboardComponent {
 
   constructor() {
     this.fetch((data) => { this.rows = data; });
-    Object.assign(this, {single, multi}) 
   }
 
   onSelect(event) {

@@ -34,6 +34,9 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthService } from './auth.service';
+import { TokenStorage } from './token.storage';
+import { CanActivateAuthGuard } from './can-activate.authguard';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -77,11 +80,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }),
     FlexLayoutModule,
   ],
-  providers: [
+  providers: [ 
     {
        provide: PERFECT_SCROLLBAR_CONFIG,
        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    AuthService,TokenStorage, CanActivateAuthGuard
   ],
   entryComponents: [JazzDialogComponent, CalendarDialogComponent ],
   bootstrap: [AppComponent]

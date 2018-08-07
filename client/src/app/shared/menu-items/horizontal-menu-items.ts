@@ -204,7 +204,4 @@ export class HorizontalMenuItems {
   getAll(): Menu[] {
     return HORIZONTALMENUITEMS;
   }
-  add(menu: Menu) {
-    // HORIZONTALMENUITEMS.push(Menu);
-  }
 }

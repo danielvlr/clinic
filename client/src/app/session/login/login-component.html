@@ -9,7 +9,7 @@
                         <form #form="ngForm" (ngSubmit)="login()">
                             <div fxLayout="column" fxLayoutAlign="start stretch">
                                 <mat-form-field style="width: 100%">
-                                    <input matInput placeholder="E-Mail" type="text" name="email" required [(ngModel)]="email">
+                                    <input matInput type="text" name="username" required [(ngModel)]="username">
                                 </mat-form-field>
                                 <mat-form-field style="width: 100%" class="mb-1">
                                     <input matInput placeholder="Password" type="password" name="password" required [(ngModel)]="password">

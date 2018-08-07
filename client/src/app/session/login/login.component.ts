@@ -23,7 +23,7 @@ export class LoginComponent {
       data => {
         console.log(data._body);
         this.token.saveToken(data._body);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     );
   }	

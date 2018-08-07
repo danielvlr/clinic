@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
@@ -26,17 +25,15 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 
-import { JazzDialogComponent } from './material/dialog/dialog.component';
-import { CalendarDialogComponent } from './apps/fullcalendar/fullcalendar.component';
 
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthService } from './auth.service';
 import { TokenStorage } from './token.storage';
 import { CanActivateAuthGuard } from './can-activate.authguard';
+import { SessionModule } from './session/session.module';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -49,10 +46,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent,
-    JazzDialogComponent,
-    CalendarDialogComponent
+    AuthLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +67,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSelectModule,
     MatCardModule,
     DemoMaterialModule,
+    SessionModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
@@ -87,7 +82,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     AuthService,TokenStorage, CanActivateAuthGuard
   ],
-  entryComponents: [JazzDialogComponent, CalendarDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

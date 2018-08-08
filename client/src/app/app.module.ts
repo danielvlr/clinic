@@ -31,7 +31,6 @@ import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthService } from './auth.service';
-import { TokenStorage } from './token.storage';
 import { SessionModule } from './session/session.module';
 import { PatientModule } from './patient/patient.module';
 
@@ -81,7 +80,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
        provide: PERFECT_SCROLLBAR_CONFIG,
        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    AuthService,TokenStorage
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,8 +2,6 @@ import { Component, OnInit ,ViewEncapsulation } from '@angular/core';
 import {Router} from "@angular/router";
 import { MatDialog } from '@angular/material';
 import { AuthService } from '../../auth.service';
-import { TokenStorage } from '../../token.storage';
-import { error } from 'protractor';
 
 @Component({
    selector: 'ms-login-session',
@@ -13,7 +11,7 @@ import { error } from 'protractor';
 })
 export class LoginComponent {
   
-  constructor(private router: Router, public dialog: MatDialog, private authService: AuthService, private token: TokenStorage) { }
+  constructor(private router: Router, public dialog: MatDialog, private authService: AuthService, private authservice: AuthService) { }
 
   username: string;
   password: string;
@@ -22,7 +20,7 @@ export class LoginComponent {
       this.authService.attemptAuth(this.username, this.password).subscribe(
       data => {
         console.log(data._body);
-        this.token.saveToken(data._body);
+        this.authservice.saveToken(data._body);
         this.router.navigate(['/home']);
       },
       error => {

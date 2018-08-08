@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientService } from '../patient.service';
 
 @Component({
     selector: 'patient-list',
@@ -13,8 +14,9 @@ export class ListComponent  implements OnInit {
   
   nome:String;
 
+  constructor(public patientservice: PatientService){}
+
   ngOnInit() {
-    this.nome = "casa";
     this.page(this.offset, this.limit);
   }
 
@@ -37,7 +39,7 @@ export class ListComponent  implements OnInit {
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', 'http://localhost:8080/paciente/');
+    req.open('GET', 'http://localhost:8080/public/patient/');
 
     req.onload = () => {
       cb(JSON.parse(req.response));

@@ -15,6 +15,7 @@ import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { PatientRoutes } from './patient.routing';
 import { RouterModule } from '@angular/router';
+import { PatientService } from './patient.service';
 
 
 @NgModule({
@@ -36,8 +37,7 @@ import { RouterModule } from '@angular/router';
   declarations: [ 
     ListComponent,
     EditComponent
-
-  ]
+  ], providers: [PatientService]
 })
 
 export class PatientModule {}

@@ -8,6 +8,6 @@ import br.leitao.clinica.entity.Paciente;
 
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 	
-	public List<Paciente> findByNome(String nome);
+	public List<Paciente> findByNomeIgnoreCaseContaining(String nome);
 	 
 }

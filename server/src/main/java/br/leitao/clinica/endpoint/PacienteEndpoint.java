@@ -11,20 +11,19 @@ import br.leitao.clinica.entity.Paciente;
 import br.leitao.clinica.service.PacienteService;
 
 @RestController
-@RequestMapping("paciente")
 public class PacienteEndpoint {
 	
 	@Autowired
 	PacienteService pacienteService;
 	
 
-	@RequestMapping("/")
+	@RequestMapping("/public/patient/")
 	public List<Paciente> findAll(){
 		return pacienteService.findAll();
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/public/patient/")
 	public List<Paciente> findAll(String nome){
-		return pacienteService.findByNome(nome);
+		return pacienteService.findByNome(nome!=null?nome:"");
 	}
 }

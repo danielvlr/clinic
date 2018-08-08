@@ -26,6 +26,11 @@ const MENUITEMS : Menu[] = [
     name: 'HOME',
     type: 'link',
     icon: 'explore'
+  },{
+    state: 'patient',
+    name: 'Patient',
+    type: 'link',
+    icon: 'explore'
   }
 ];
 

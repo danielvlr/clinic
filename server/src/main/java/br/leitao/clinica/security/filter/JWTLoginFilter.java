@@ -2,6 +2,8 @@ package br.leitao.clinica.security.filter;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -46,6 +48,10 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletResponse res, FilterChain chain,
             Authentication auth
     ) throws IOException, ServletException {
-        TokenAuthenticationService.addAuthentication(res, auth.getName());
+    	Map<String, Object> claims = new HashMap<>();
+    	claims.put("atw1", "1231");
+    	claims.put("atw2", "1232");
+    	claims.put("atw3", "1233");
+        TokenAuthenticationService.addAuthentication(res, auth.getName(), claims);
     }
 }

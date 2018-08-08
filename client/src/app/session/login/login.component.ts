@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import { MatDialog } from '@angular/material';
 import { AuthService } from '../../auth.service';
 import { TokenStorage } from '../../token.storage';
+import { error } from 'protractor';
 
 @Component({
    selector: 'ms-login-session',
@@ -18,12 +19,14 @@ export class LoginComponent {
   password: string;
 
   login(): void {
-    console.log(this.username);
-    this.authService.attemptAuth(this.username, this.password).subscribe(
+      this.authService.attemptAuth(this.username, this.password).subscribe(
       data => {
         console.log(data._body);
         this.token.saveToken(data._body);
         this.router.navigate(['/home']);
+      },
+      error => {
+        console.log("Erro ao tentar autenticar");
       }
     );
   }	

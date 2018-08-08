@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>Patient</mat-card-title>
+  <mat-card-subtitle>List of Patients</mat-card-subtitle>
+  <hr>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+      <mat-form-field class="ml-xs mr-xs" >
+        <input matInput placeholder="Name" type="text" [(ngModel)]="nome" >
+      </mat-form-field>
+    </div>
+    <div class="pb-1">
+      <button mat-raised-button color="primary" (click)="search()" class="mr-1 mb-1">Search</button>
+    </div>
+  </mat-card-content>
+ </mat-card>
+
+
+
+<ngx-datatable
+  class="material"
+  [rows]="rows"
+  [columns]="[{name:'Nome'},{name:'Idade'}]"
+  [columnMode]="'force'"
+  [headerHeight]="30"
+  [footerHeight]="30"
+  [rowHeight]="'auto'"
+  [externalPaging]="true"
+  [count]="count"
+  [offset]="offset"
+  [limit]="limit"
+  (page)='onPage($event)'>
+</ngx-datatable>

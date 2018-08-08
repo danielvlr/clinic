@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-import { CanActivateAuthGuard } from 'app/can-activate.authguard';
 import { LoginComponent } from './session/login/login.component';
 
 export const AppRoutes: Routes = [{
@@ -13,11 +12,13 @@ export const AppRoutes: Routes = [{
   component: AuthLayoutComponent,
   children: [{
     path: 'home',
-    loadChildren: './dashboard/dashboard.module#DashboardModule',
-    canActivate: [CanActivateAuthGuard]
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
+  }, {
+    path: 'patient',
+    loadChildren: './patient/patient.module#PatientModule'
   }]
 }, {
-  path: 'authentication',
+  path: '',
   component: LoginComponent,
   children: [{
     path: 'authentication',
@@ -30,3 +31,6 @@ export const AppRoutes: Routes = [{
   path: '**',
   redirectTo: 'session/404'
 }];
+
+
+

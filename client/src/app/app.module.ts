@@ -32,8 +32,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthService } from './auth.service';
 import { TokenStorage } from './token.storage';
-import { CanActivateAuthGuard } from './can-activate.authguard';
 import { SessionModule } from './session/session.module';
+import { PatientModule } from './patient/patient.module';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -68,6 +68,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatCardModule,
     DemoMaterialModule,
     SessionModule,
+    PatientModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
@@ -80,7 +81,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
        provide: PERFECT_SCROLLBAR_CONFIG,
        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    AuthService,TokenStorage, CanActivateAuthGuard
+    AuthService,TokenStorage
   ],
   bootstrap: [AppComponent]
 })

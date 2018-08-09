@@ -208,7 +208,6 @@ export class DashboardComponent {
   }
 
   onSelect(event) {
-    console.log(event);
   }
 
   // project table

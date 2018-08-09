@@ -6,22 +6,25 @@ import {
   MatRadioModule,
   MatButtonModule,
   MatProgressBarModule,
-  MatToolbarModule } from '@angular/material';
+  MatToolbarModule, 
+  MatTableModule,
+  MatPaginatorModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
-import { PatientRoutes } from './patient.routing';
 import { RouterModule } from '@angular/router';
-import { PatientService } from './patient.service';
+import { CdkTableModule } from '@angular/cdk/table';
+import { PacienteRoutes } from './paciente.routing';
+import { PacienteService } from './paciente.service';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(PatientRoutes),
+    RouterModule.forChild(PacienteRoutes),
     FormsModule,
     MatIconModule,
     MatCardModule,
@@ -31,13 +34,16 @@ import { PatientService } from './patient.service';
     MatButtonModule,
     MatProgressBarModule,
     MatToolbarModule,
+    MatTableModule,
+    CdkTableModule,
+    MatPaginatorModule,
     NgxDatatableModule,
     FlexLayoutModule
   ],
   declarations: [ 
     ListComponent,
     EditComponent
-  ], providers: [PatientService]
+  ], providers: [PacienteService]
 })
 
-export class PatientModule {}
+export class PacienteModule {}

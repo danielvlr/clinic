@@ -14,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports:[
     HttpModule,
     FormsModule,
-    HttpClientModule],
+    HttpClientModule
+  ],
   declarations: [
     AccordionAnchorDirective,
     AccordionLinkDirective,

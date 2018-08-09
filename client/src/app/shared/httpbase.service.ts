@@ -1,10 +1,10 @@
 import { Observable } from "rxjs/Observable"; // <- add this import
+import { of as observableOf } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from 'environments/environment';
 import { AuthService } from '../auth.service';
-
 
 @Injectable()
 export class HttpBaseService {
@@ -26,7 +26,7 @@ export class HttpBaseService {
     }), map((res) => this.refreshToken(res)),
       catchError(res => {
         this.formatError(res);
-        return res;
+        return observableOf(res);
       }));
   }
 
@@ -40,7 +40,7 @@ export class HttpBaseService {
     , map(res => this.refreshToken(res)),
       catchError(res => {
         this.formatError(res);
-        return res;
+        return observableOf(res);
       }));
   }
 
@@ -54,7 +54,7 @@ export class HttpBaseService {
     , map((res) => this.refreshToken(res)),
       catchError(res => {
         this.formatError(res);
-        return res;
+        return observableOf(res);
       }));
   }
 
@@ -65,7 +65,7 @@ export class HttpBaseService {
       finalize(() => { })
       , catchError(res => {
         this.formatError(res);
-        return res;
+        return observableOf(res);
       }));
   }
 
@@ -96,15 +96,22 @@ export class HttpBaseService {
   }
 
   private refreshToken(res) {
-    return this.authservice.getToken();
+    const contentType = res.headers.get('Content-type');
+    if (!contentType) {
+      return null;
+    }
+    if (contentType.includes('json')) {
+      return res.body;
+    } else if (contentType.includes('text')) {
+      return res.text();
+    }
   }
 
   private appendTokenToRequest() {
     if (this.authservice.getToken()) {
-      this.headers = this.headers.set('x-access-token', this.authservice.getToken());
+      this.headers = this.headers.set('Authorization', this.authservice.getToken());
     }
   }
-
   private getRequestOptions(): Object {
     return { headers: this.headers, observe: 'response' };
   }

@@ -14,8 +14,8 @@ export const AppRoutes: Routes = [{
     path: 'home',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   }, {
-    path: 'patient',
-    loadChildren: './patient/patient.module#PatientModule'
+    path: 'paciente',
+    loadChildren: './paciente/paciente.module#PacienteModule'
   }]
 }, {
   path: '',

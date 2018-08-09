@@ -130,7 +130,6 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
 
   changeMenuLayout(value)
   {
-    console.log(value)
     if(value)
     {
       this.menuLayout = 'top-menu';

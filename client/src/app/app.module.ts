@@ -32,7 +32,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthService } from './auth.service';
 import { SessionModule } from './session/session.module';
-import { PatientModule } from './patient/patient.module';
+import { PacienteModule } from './paciente/paciente.module';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -67,7 +67,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatCardModule,
     DemoMaterialModule,
     SessionModule,
-    PatientModule,
+    PacienteModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),

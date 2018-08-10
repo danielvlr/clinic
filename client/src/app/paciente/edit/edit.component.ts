@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PacienteService } from '../paciente.service';
 import { Paciente } from '../paciente';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'paciente-edit',
@@ -10,9 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class EditComponent implements OnInit {
-  public entity: Paciente;
-  public nome: String;
-  constructor(public service : PacienteService, private activatedroute: ActivatedRoute ) { }
+  entity: Paciente = new Paciente();
+
+  public tipoSexo = [
+    {"id": "M", "name": "Masculino"},
+    {"id": "F", "name": "Feminino"}
+  ]
+
+  constructor(public service : PacienteService, private activatedroute: ActivatedRoute, private router: Router) { }
+  
   ngOnInit() {
     let id = +this.activatedroute.snapshot.paramMap.get('id');
     if (id) {
@@ -21,4 +27,11 @@ export class EditComponent implements OnInit {
       });
     }
   }
+
+  save(){
+    this.service.save(this.entity);
+    //this.router.navigate(['paciente']);
+  }
+
+
 }

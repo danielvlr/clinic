@@ -1,10 +1,33 @@
 <mat-card>
-    <ng-container>
-
-        <mat-form-field style="width: 30%; margin-right: 10px">
-            <input matInput placeholder="Nome" style="text-transform:uppercase" [(ngModel)]="entity.nome"/>
+    <mat-card-title>Paciente</mat-card-title>
+    <mat-card-subtitle>Dados do paciente</mat-card-subtitle>
+    <hr>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+        <mat-form-field class="ml-xs mr-xs" >
+            <input matInput placeholder="Nome" [(ngModel)]="entity.nome"/>
         </mat-form-field>
-    
-    
-    </ng-container>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+        <mat-form-field>
+            <mat-select placeholder="Choose an option" [(ngModel)]="entity.sexo">
+                <mat-option *ngFor="let tipo of tipoSexo" [value]="tipo.id">{{tipo.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>     
+        <mat-form-field class="ml-xs mr-xs" >
+            <input matInput placeholder="Idade" [(ngModel)]="entity.idade"/>
+        </mat-form-field>        
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+        <mat-form-field class="ml-xs mr-xs" >
+            <input matInput placeholder="Endereco" [(ngModel)]="entity.endereco"/>
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" >
+            <input matInput placeholder="Telefone" [(ngModel)]="entity.telefone"/>
+        </mat-form-field>        
+      </div>
+      <div class="pb-1">
+        <button mat-raised-button color="primary" (click)="save()" class="mr-1 mb-1">Salvar</button>
+      </div>
+    </mat-card-content>
 </mat-card>

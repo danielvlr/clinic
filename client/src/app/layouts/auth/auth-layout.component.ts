@@ -42,7 +42,6 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
   public config: PerfectScrollbarConfigInterface = {};
 
   constructor(private router: Router, public menuItems: MenuItems, public horizontalMenuItems : HorizontalMenuItems, public translate: TranslateService, public authservice :  AuthService) {
-    this.dark=true;
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
   }

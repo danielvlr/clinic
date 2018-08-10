@@ -1,5 +1,4 @@
-import { BaseModel } from "../shared/BaseModel";
-
+import { BaseModel } from "../shared/basemodel";
 
 export class Paciente extends BaseModel{
     id: number;
@@ -7,4 +6,5 @@ export class Paciente extends BaseModel{
     telefone: String;
     idade: String;
     endereco: String;
+    sexo: String;
  }

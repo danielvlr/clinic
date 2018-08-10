@@ -31,7 +31,7 @@ export class HttpBaseService {
   }
 
   public post(resource: string, body: any, blockUI = true) {
-    this.appendTokenToRequest();
+    //this.appendTokenToRequest();
     if (body !== undefined) {
       this.body = JSON.stringify(body);
     }

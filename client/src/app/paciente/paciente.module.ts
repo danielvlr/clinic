@@ -8,7 +8,8 @@ import {
   MatProgressBarModule,
   MatToolbarModule, 
   MatTableModule,
-  MatPaginatorModule} from '@angular/material';
+  MatPaginatorModule,
+  MatSelectModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -35,6 +36,7 @@ import { PacienteService } from './paciente.service';
     MatProgressBarModule,
     MatToolbarModule,
     MatTableModule,
+    MatSelectModule,
     CdkTableModule,
     MatPaginatorModule,
     NgxDatatableModule,

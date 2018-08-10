@@ -41,4 +41,9 @@ public class PacienteEndpoint {
 		return pacienteRepository.findById(id);
 	}
 
+	@PostMapping(path="/public/paciente/", produces = "application/json")
+	public Paciente save(@RequestBody(required=true) Paciente paciente){
+		return pacienteRepository.save(paciente);
+	}
+	
 }

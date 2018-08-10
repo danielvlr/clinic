@@ -16,8 +16,4 @@ public class PacienteService {
 	public List<Paciente> findAll() {
 		return pacienteRepository.findAll();
 	}
-	
-	public List<Paciente> findByNome(String nome){
-		return pacienteRepository.findByNomeIgnoreCaseContaining(nome);
-	}
 }

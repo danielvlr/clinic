@@ -32,11 +32,6 @@ export class ListComponent  implements OnInit {
     return event;
   }
 
-  resetPaginacao() {
-    const index = this.pageSizeOptions.indexOf(this.pagina.numberOfElements);
-    this.paginaAutorizacoes(0, this.pageSizeOptions[index] > -1 ? this.pageSizeOptions[index] : 10);
-  }
-
   navigate(id: number) {
     this.router.navigate(['paciente/edit', id]);
   }

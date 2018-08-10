@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { BaseModel } from './BaseModel';
+import { BaseModel } from "../shared/basemodel";
 import { HttpBaseService } from './httpbase.service';
 import { Paginacao } from './paginacao';
 

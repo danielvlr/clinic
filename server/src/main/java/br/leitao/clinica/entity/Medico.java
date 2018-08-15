@@ -21,9 +21,14 @@ public class Medico implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "db_clinica.sq_pk_medico")
 	@Column(name = "id")
 	private Long id;
-
 	private String nome;
-	private String planos;
+
+	public Medico() {
+	}
+	
+	public Medico(Long id) {
+		this.id = id;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -36,11 +41,4 @@ public class Medico implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getPlanos() {
-		return planos;
-	}
-	public void setPlanos(String planos) {
-		this.planos = planos;
-	}
-	
 }

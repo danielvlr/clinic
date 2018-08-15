@@ -1,6 +1,7 @@
 package br.leitao.clinica.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,11 +24,15 @@ public class Consulta implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	private String anotacoes;
-	private String resceituario;
-	
+	private String title;
+	private Date start;
+	private Date end;
+
 	@ManyToOne
 	private Paciente paciente;
+
+	@ManyToOne
+	private Medico medico;
 
 	public Long getId() {
 		return id;
@@ -37,20 +42,28 @@ public class Consulta implements Serializable {
 		this.id = id;
 	}
 
-	public String getAnotacoes() {
-		return anotacoes;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setAnotacoes(String anotacoes) {
-		this.anotacoes = anotacoes;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getResceituario() {
-		return resceituario;
+	public Date getStart() {
+		return start;
 	}
 
-	public void setResceituario(String resceituario) {
-		this.resceituario = resceituario;
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 
 	public Paciente getPaciente() {
@@ -61,5 +74,11 @@ public class Consulta implements Serializable {
 		this.paciente = paciente;
 	}
 
-	
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
 }

@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.leitao.clinica.entity.Agenda;
 
-interface AgendaRepository extends CrudRepository<Agenda, Long> {
+public interface AgendaRepository extends CrudRepository<Agenda, Long> {
 }

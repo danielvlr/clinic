@@ -1,8 +1,8 @@
 package br.leitao.clinica.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.leitao.clinica.entity.Medico;
 
-interface MedicoRepository extends CrudRepository<Medico, Long> {
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
 }

@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_paciente", schema = "db_clinica")
 public class Paciente implements Serializable {
@@ -28,7 +30,10 @@ public class Paciente implements Serializable {
 	private String telefone;
 	private Integer idade;
 	private String endereco;
+	private String sexo;
+	
 
+	@JsonIgnore
 	@OneToMany(mappedBy="paciente")
 	private List<Consulta> consultas;
 
@@ -70,6 +75,14 @@ public class Paciente implements Serializable {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public List<Consulta> getConsultas() {

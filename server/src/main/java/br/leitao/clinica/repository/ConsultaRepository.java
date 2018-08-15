@@ -1,8 +1,8 @@
 package br.leitao.clinica.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.leitao.clinica.entity.Consulta;
 
-interface ConsultaRepository extends CrudRepository<Consulta, Long> {
+public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 }

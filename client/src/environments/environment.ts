@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backendUrl: `http://${window.location.hostname}:8080`
+  backendUrl: `http://${window.location.hostname}:8080/`
 };

@@ -1,32 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { MatIconModule, MatCardModule, MatButtonModule, MatListModule, MatProgressBarModule, MatMenuModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { NgxChartsModule} from '@swimlane/ngx-charts';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
+import { SharedModule } from '../shared/shared.module';
+import { FullCalendarModule } from 'ng-fullcalendar';
+import { ConsultaService } from '../consulta/consulta.service';
+import { MedicoService } from '../medico/medico.service';
+import { JwtInterceptor } from '../jwt.interceptor';
+
 
 @NgModule({
   imports: [
-    CommonModule,
+    FullCalendarModule,
     RouterModule.forChild(DashboardRoutes),
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatMenuModule,
-    ChartsModule,
-    NgxChartsModule,
-    NgxDatatableModule,
-    FlexLayoutModule
+    SharedModule
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [ DashboardComponent ], 
+  providers: [ConsultaService, MedicoService, JwtInterceptor]
 })
 
-export class DashboardModule {}
+export class DashboardModule { }

@@ -31,7 +31,13 @@ const MENUITEMS : Menu[] = [
     name: 'Paciente',
     type: 'link',
     icon: 'explore'
+  },{
+    state: 'consulta',
+    name: 'Consulta',
+    type: 'link',
+    icon: 'explore'
   }
+  
 ];
 
 @Injectable()

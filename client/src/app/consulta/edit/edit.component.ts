@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { PacienteService } from '../paciente.service';
-import { Paciente } from '../paciente';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Consulta } from '../consulta';
+import { ConsultaService } from '../consulta.service';
 
 @Component({
-    selector: 'paciente-edit',
+    selector: 'consulta-edit',
     templateUrl: './edit.component.html',
     styleUrls: ['./edit.component.scss']
 })
 
 export class EditComponent implements OnInit {
-  entity: Paciente = new Paciente();
+  entity: Consulta = new Consulta();
 
   public tipoSexo = [
     {"id": "M", "name": "Masculino"},
     {"id": "F", "name": "Feminino"}
   ]
 
-  constructor(public service : PacienteService, private activatedroute: ActivatedRoute, private router: Router) { }
+  constructor(public service : ConsultaService, private activatedroute: ActivatedRoute, private router: Router) { }
   
   ngOnInit() {
     let id = +this.activatedroute.snapshot.paramMap.get('id');
@@ -29,10 +29,8 @@ export class EditComponent implements OnInit {
   }
 
   save(){
-    this.service.save(this.entity).subscribe(res => {
-      this.entity = res;
-    });
-    this.router.navigate(['paciente']);
+    this.service.save(this.entity);
+    this.router.navigate(['consulta']);
   }
 
 

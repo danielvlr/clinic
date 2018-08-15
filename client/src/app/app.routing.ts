@@ -16,6 +16,9 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'paciente',
     loadChildren: './paciente/paciente.module#PacienteModule'
+  }, {
+    path: 'consulta',
+    loadChildren: './consulta/consulta.module#ConsultaModule'
   }]
 }, {
   path: '',
@@ -23,7 +26,7 @@ export const AppRoutes: Routes = [{
   children: [{
     path: 'authentication',
     loadChildren: './session/session.module#SessionModule'
-  },{
+  }, {
     path: 'error',
     loadChildren: './error/error.module#ErrorModule'
   }]

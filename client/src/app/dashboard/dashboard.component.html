@@ -1,0 +1,28 @@
+<mat-card>
+    <mat-card-title>Agenda</mat-card-title>
+    <hr>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+            <mat-form-field>
+                <mat-select placeholder="Choose an option" placeholder="Medico" [(ngModel)]="consulta.medico">
+                    <mat-option *ngFor="let entity of medicos" [value]="entity.id">{{entity.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="pb-1">
+            <button mat-raised-button color="primary" (click)="loadevents()" class="mr-1 mb-1">Pesquisar</button>
+            <button mat-raised-button color="primary" (click)="insert()" class="mr-1 mb-1">Cadastrar</button>
+        </div>
+        <div class="pb-1">
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-content>
+        <div *ngIf="calendarOptions">
+            <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events"></ng-fullcalendar>
+        </div>
+    </mat-card-content>
+
+</mat-card>

@@ -6,6 +6,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AuthService } from '../auth.service';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class HttpBaseService {
 
@@ -14,14 +19,12 @@ export class HttpBaseService {
   private headers: HttpHeaders;
 
   constructor(
-    private http: HttpClient,
-    private authservice: AuthService) {
+    private http: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.apiUrl = environment.backendUrl;
   }
 
   public get(resource: string, blockUI = true) {
-    this.appendTokenToRequest();
     return this.http.get(this.apiUrl.concat(resource), this.getRequestOptions()).pipe(finalize(() => {
     }), map((res) => this.refreshToken(res)),
       catchError(res => {
@@ -30,7 +33,7 @@ export class HttpBaseService {
       }));
   }
 
-  public post(resource: string, body: any, blockUI = true) {
+  public  post(resource: string, body: any, blockUI = true) {
     //this.appendTokenToRequest();
     if (body !== undefined) {
       this.body = JSON.stringify(body);
@@ -45,7 +48,6 @@ export class HttpBaseService {
   }
 
   public put(resource: string, body: any, blockUI = true) {
-    this.appendTokenToRequest();
     if (body !== undefined) {
       this.body = JSON.stringify(body);
     }
@@ -59,8 +61,6 @@ export class HttpBaseService {
   }
 
   public delete(resource: string, blockUI = true) {
-    this.appendTokenToRequest();
-
     return this.http.delete(this.apiUrl.concat(resource), this.getRequestOptions()).pipe(
       finalize(() => { })
       , catchError(res => {
@@ -107,11 +107,6 @@ export class HttpBaseService {
     }
   }
 
-  private appendTokenToRequest() {
-    if (this.authservice.getToken()) {
-      this.headers = this.headers.set('Authorization', this.authservice.getToken());
-    }
-  }
   private getRequestOptions(): Object {
     return { headers: this.headers, observe: 'response' };
   }

@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-title>Paciente</mat-card-title>
+  <mat-card-subtitle>Lista de pacientes</mat-card-subtitle>
+  <hr>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+      <mat-form-field class="ml-xs mr-xs" >
+        <input matInput placeholder="Nome" type="text" [(ngModel)]="filtro.nome" >
+      </mat-form-field>
+    </div>
+    <div class="pb-1">
+      <button mat-raised-button color="primary" (click)="paginaAutorizacoes()" class="mr-1 mb-1">Pesquisar</button>
+    </div>
+  </mat-card-content>
+ </mat-card>
+
+<mat-card>
+  <mat-card-content>
+    <ng-container *ngIf="pagina?.content">
+      <mat-table #table [dataSource]="pagina?.content" >
+        <ng-container matColumnDef="nome">
+          <mat-header-cell class="mat-header-small no-wrap" *matHeaderCellDef>Nome</mat-header-cell>
+          <mat-cell class="mat-cell-small no-wrap" *matCellDef="let entity">{{ entity.nome }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="idade">
+          <mat-header-cell class="mat-header-small no-wrap" *matHeaderCellDef>Idade</mat-header-cell>
+          <mat-cell class="mat-cell-small no-wrap" *matCellDef="let entity">{{ entity.idade }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="telefone">
+          <mat-header-cell class="mat-header-small no-wrap" *matHeaderCellDef>Telefone</mat-header-cell>
+          <mat-cell class="mat-cell-small no-wrap" *matCellDef="let entity">{{ entity.telefone }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="acoes">
+            <mat-header-cell class="mat-header-small no-wrap" *matHeaderCellDef>Ações</mat-header-cell>
+            <mat-cell *matCellDef="let entity" class="text-center">
+              <button mat-icon-button matTooltip="Analisar" (click)="navigate(entity.id)">
+                <mat-icon>search</mat-icon>
+              </button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="pagina?.totalElements" [pageIndex]="pagina?.number" [pageSize]="pagina?.numberOfElements < pageSizeOptions[0] ? pageSizeOptions[0] : pagina.numberOfElements"
+        (page)="pageEvent = paginaAutorizacoes($event.pageIndex, $event.pageSize, $event)" [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

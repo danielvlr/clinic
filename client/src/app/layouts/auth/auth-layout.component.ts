@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 
-import { TranslateService } from 'ng2-translate/ng2-translate';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { PerfectScrollbarConfigInterface,
 PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
@@ -41,9 +40,7 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
   @ViewChild('sidemenu') sidemenu;
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(private router: Router, public menuItems: MenuItems, public horizontalMenuItems : HorizontalMenuItems, public translate: TranslateService, public authservice :  AuthService) {
-    const browserLang: string = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+  constructor(private router: Router, public menuItems: MenuItems, public horizontalMenuItems : HorizontalMenuItems, public authservice :  AuthService) {
   }
 
   ngOnInit(): void {

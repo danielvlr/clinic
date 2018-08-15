@@ -11,21 +11,6 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { DemoMaterialModule } from './shared/demo.module';
-
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCardModule} from '@angular/material/card';
-
-
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
@@ -33,10 +18,9 @@ import { SharedModule } from './shared/shared.module';
 import { AuthService } from './auth.service';
 import { SessionModule } from './session/session.module';
 import { PacienteModule } from './paciente/paciente.module';
-
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
-}
+import { DashboardModule } from './dashboard/dashboard.module';
+import { JwtInterceptor, InterceptorOne, InterceptorTwo } from './jwt.interceptor';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -54,31 +38,27 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RouterModule.forRoot(AppRoutes),
     FormsModule,
     HttpModule,
-    MatSidenavModule,
-    MatInputModule,
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatTabsModule,
-    MatCheckboxModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatCardModule,
-    DemoMaterialModule,
     SessionModule,
     PacienteModule,
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
-    }),
-    FlexLayoutModule,
+    DashboardModule,
   ],
   providers: [ 
     {
        provide: PERFECT_SCROLLBAR_CONFIG,
-       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },{
+      useClass: JwtInterceptor,
+      provide: HTTP_INTERCEPTORS,
+      multi: true
+    },    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorOne,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorTwo,
+      multi: true,
     },
     AuthService
   ],

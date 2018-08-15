@@ -31,7 +31,17 @@ import { SessionRoutes } from './session.routing';
     MatButtonModule,
     MatProgressBarModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    MatIconModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatToolbarModule,
+    FlexLayoutModule    
   ],
   declarations: [ 
     LoginComponent,

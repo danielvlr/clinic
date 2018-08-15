@@ -1,4 +1,4 @@
-import { BaseModel } from "../shared/basemodel";
+import { BaseModel } from "./basemodel";
 
 export class Paginacao<T extends BaseModel> {
     content: Array<T>;

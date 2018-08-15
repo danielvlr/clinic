@@ -1,9 +1,12 @@
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs/Observable"; // <- add this import
+import { of as observableOf } from 'rxjs';
+import { catchError, finalize, map } from 'rxjs/operators';
+
 import { Injectable, Inject } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { BaseModel } from "../shared/basemodel";
-import { HttpBaseService } from './httpbase.service';
+import { BaseModel } from "./basemodel";
 import { Paginacao } from './paginacao';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from "environments/environment";
 
 
 export interface RestfulModel<T extends BaseModel> {
@@ -16,33 +19,84 @@ export interface RestfulModel<T extends BaseModel> {
 })
 export class RestfulService<T extends BaseModel> {
 
-  constructor(protected http: HttpBaseService, @Inject('api-url') protected apiUrl: string) { }
+  private body: Object = {};
+  apiUrl: String;
+
+  constructor(public http: HttpClient, protected path: string) {
+    this.apiUrl = environment.backendUrl + path;
+  }
 
   public get(id: number, blockUI = true): Observable<T> {
-    return this.http.get(`/${this.apiUrl}/${id}`, blockUI);
+    return this.http.get(`${this.apiUrl}/${id}`, this.getRequestOptions()).pipe(finalize(() => {
+    }), map((res) => this.refreshToken(res)),
+      catchError(res => {
+        return observableOf(res);
+      }));
+
   }
 
   public getAll(blockUI = true): Observable<T[]> {
-    return this.http.get(`/${this.apiUrl}/all`, blockUI);
+    return this.http.get(`${this.apiUrl}/all`, this.getRequestOptions()).pipe(finalize(() => {
+    }), map((res) => this.refreshToken(res)),
+      catchError(res => {
+        return observableOf(res);
+      }));
   }
 
   public save(model: T, blockUI = true): Observable<T> {
-    return this.http.post(`/${this.apiUrl}`, model, blockUI);
+    if (model !== undefined) {
+      this.body = JSON.stringify(model);
+    }
+    return this.http.post(`${this.apiUrl}`, this.body, this.getRequestOptions()).pipe(finalize(() => { })
+      , map((res) => this.refreshToken(res)),
+      catchError(res => {
+        return observableOf(res);
+      }));
   }
 
   public update(model: T, blockUI = true): Observable<T> {
-    return this.http.put(`/${this.apiUrl}`, model, blockUI);
+    if (model !== undefined) {
+      this.body = JSON.stringify(model);
+    }
+    return this.http.put(`${this.apiUrl}`, this.body, this.getRequestOptions()).pipe(finalize(() => { })
+      , map((res) => this.refreshToken(res)),
+      catchError(res => {
+        return observableOf(res);
+      }));
   }
 
   public remove(id: number, blockUI = true): Observable<T> {
-    return this.http.delete(`/${this.apiUrl}/${id}`, blockUI);
+    return this.http.delete(`${this.apiUrl}/${id}`, this.getRequestOptions()).pipe(
+      finalize(() => { })
+      , catchError(res => {
+        return observableOf(res);
+      }));
   }
 
   public filterList(model: T, numeroDaPagina: number, registrosPorPagina: number, blockUI = true): Observable<Paginacao<T>> {
-    return this.http.post(`/${this.apiUrl}/${numeroDaPagina !== undefined ? numeroDaPagina : 0}/${registrosPorPagina !== undefined ? registrosPorPagina : 10}`, model, blockUI);
+    if (model !== undefined) {
+      this.body = JSON.stringify(model);
+    }
+    return this.http.post(`${this.apiUrl}/${numeroDaPagina !== undefined ? numeroDaPagina : 0}/${registrosPorPagina !== undefined ? registrosPorPagina : 10}`, this.body, this.getRequestOptions()).pipe(finalize(() => { })
+      , map((res) => this.refreshToken(res)),
+      catchError(res => {
+        return observableOf(res);
+      }));
   }
 
-  public setApiURL(apiUrl: string) {
-    this.apiUrl = apiUrl;
+  private refreshToken(res) {
+    const contentType = res.headers.get('Content-type');
+    if (!contentType) {
+      return null;
+    }
+    if (contentType.includes('json')) {
+      return res.body;
+    } else if (contentType.includes('text')) {
+      return res.text();
+    }
+  }
+
+  private getRequestOptions(): Object {
+    return { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response' };
   }
 }

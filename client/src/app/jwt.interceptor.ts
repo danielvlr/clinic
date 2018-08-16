@@ -1,42 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse }  from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+import { AuthService } from './auth.service';
 
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
-    intercept(
-      req: HttpRequest<any>,
-      next: HttpHandler
-    ): Observable<HttpEvent<any>> {
-        console.log('asdad');
-      return next.handle(req).do(evt => {
-        if (evt instanceof HttpResponse) {
-          console.log('---> status:', evt.status);
-          console.log('---> filter:', req.params.get('filter'));
-        }
-      });
-  
+    constructor(public auth: AuthService) { }
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        request = request.clone({
+            setHeaders: { Authorization: `${this.auth.getToken()}` }
+        });
+        return next.handle(request);
     }
-  }
-
-  
-  @Injectable()
-  export class InterceptorOne implements HttpInterceptor {
-  
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log('InterceptorOne is working');
-      return next.handle(req);
-    }
-  }
-  
-  @Injectable()
-  export class InterceptorTwo implements HttpInterceptor {
-  
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log('InterceptorTwo is working');
-      return next.handle(req);
-    }
-  }
+}

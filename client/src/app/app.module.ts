@@ -19,8 +19,9 @@ import { AuthService } from './auth.service';
 import { SessionModule } from './session/session.module';
 import { PacienteModule } from './paciente/paciente.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { JwtInterceptor, InterceptorOne, InterceptorTwo } from './jwt.interceptor';
+import { JwtInterceptor } from './jwt.interceptor';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { CanActivateAuthGuard } from './can-activate.authguard';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,21 +47,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
        provide: PERFECT_SCROLLBAR_CONFIG,
        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },{
-      useClass: JwtInterceptor,
-      provide: HTTP_INTERCEPTORS,
-      multi: true
-    },    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorOne,
-      multi: true,
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorTwo,
-      multi: true,
-    },
-    AuthService
+    AuthService, CanActivateAuthGuard
   ],
   bootstrap: [AppComponent]
 })

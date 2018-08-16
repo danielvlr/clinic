@@ -47,10 +47,11 @@ import { HorizontalMenuItems } from './menu-items/horizontal-menu-items';
 import { AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective } from './accordion';
 import { ToggleFullscreenDirective } from './fullscreen/toggle-fullscreen.directive';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { JwtInterceptor } from '../jwt.interceptor';
 
 @NgModule({
   imports:[
@@ -116,6 +117,13 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxDatatableModule,
     FormsModule
    ],
-  providers: [ MenuItems, HorizontalMenuItems ]
+  providers: [ MenuItems, HorizontalMenuItems,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
+  
+  ]
 })
 export class SharedModule { }

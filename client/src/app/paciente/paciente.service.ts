@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PacienteService extends RestfulService<Paciente> {
-    constructor( public http: HttpClient) {
+    constructor(public http: HttpClient) {
         super(http, 'public/paciente');
     }
 }
